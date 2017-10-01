@@ -6,15 +6,18 @@ Helon.ress.images = {
 	quantity : 0,
 	loaded : 0
 };
+var SPRITE = {};
 
-Helon.task = function(){
+Helon.app = function(){
 	Helon.ctx.fillStyle = "black";
 	Helon.ctx.fillRect(0, 0, 1280, 720);
 	bar(Helon.ress.images);
 }
 
-Helon.start = function(){
-	requestAnimationFrame(Helon.task);
+Helon.loop = function(){
+	Helon.app();
+	cursor.display();
+	requestAnimationFrame(Helon.loop);
 }
 
 window.onload = function(){
@@ -25,17 +28,23 @@ window.onload = function(){
 	Helon.ctx.fillStyle = "yellow";
 	Helon.ctx.font = "24px Consolas";
 	Helon.ctx.fillText("Running on Helon Engine", 200, 400);
-	setTimeout(Helon.start, 2000);
+	setTimeout(Helon.loop, 2000);
 	
 	for (var a in images){
 		Helon.ress.images.quantity += 1;
-		Helon.ress[a] = new Image();
-		Helon.ress[a].src = "ress/images/" + images[a] + "/" + a + ".png";
-		Helon.ress[a].addEventListener("load",function(e){
-			Helon.ress.image.loaded +=1;
-			if (Helon.ress.image.loaded === Helon.ress.image.quantity) {
-				console.log(image.quantity,image.loaded);
-				//Helon.task = ;
+		Helon.ress.images[a] = new Image();
+		Helon.ress.images[a].src = "ress/" + images[a] + "/" + a + ".png";
+		Helon.ress.images[a].addEventListener("load",function(e){
+			Helon.ress.images.loaded +=1;
+			if (Helon.ress.images.loaded === Helon.ress.images.quantity) {
+				console.log(Helon.ress.images.quantity,Helon.ress.images.loaded);
+				SPRITE = Helon.ress.images;
+				if (typeof Appstart !== "function"){
+					alert("No executable Application found");
+				}
+				else{
+					Appstart();
+				}
 			}
 		})
 	}

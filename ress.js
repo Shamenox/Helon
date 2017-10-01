@@ -1,5 +1,6 @@
 images = {
-	cursor : "sys"
+	cursor : "sys",
+	arrow : "sys"
 }
 
 function loadAudio(){}
