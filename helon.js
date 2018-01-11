@@ -1,6 +1,7 @@
 var Helon = {};
-Helon.programs = {};
 Helon.ress = {};
+Helon.tics = 0;
+Helon.muted = false;
 Helon.ress.audio = {};
 Helon.ress.images = {
 	quantity : 0,
@@ -17,6 +18,7 @@ Helon.app = function(){
 Helon.loop = function(){
 	Helon.app();
 	cursor.display();
+	Helon.tics++;
 	requestAnimationFrame(Helon.loop);
 }
 
@@ -30,6 +32,10 @@ window.onload = function(){
 	Helon.ctx.fillText("Running on Helon Engine", 200, 400);
 	setTimeout(Helon.loop, 2000);
 	
+	
+	for (var i = 0; i < audibles.length; i++){
+		Helon.ress.audio[audibles[i]] = new Audio("ress/audio/" + audibles[i] + ".mp3");
+	}
 	for (var a in images){
 		Helon.ress.images.quantity += 1;
 		Helon.ress.images[a] = new Image();
@@ -37,7 +43,7 @@ window.onload = function(){
 		Helon.ress.images[a].addEventListener("load",function(e){
 			Helon.ress.images.loaded +=1;
 			if (Helon.ress.images.loaded === Helon.ress.images.quantity) {
-				console.log(Helon.ress.images.quantity,Helon.ress.images.loaded);
+				console.log(Helon.ress.images);
 				SPRITE = Helon.ress.images;
 				if (typeof Appstart !== "function"){
 					alert("No executable Application found");
@@ -48,5 +54,4 @@ window.onload = function(){
 			}
 		})
 	}
-	loadAudio();
 }
