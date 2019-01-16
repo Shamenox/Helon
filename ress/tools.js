@@ -22,6 +22,42 @@ function exists(obj){
 
 
 
+function getImg(img){
+	if (Helon.ress.images.loaded === 0){
+		console.log("No images loaded yet!!!");
+		return new Image();
+	}
+	if (!exists(img)) img = "cross";
+	if (!exists(img.src)){
+		for (var a in Helon.ress.images){
+			if (a === img) img = Helon.ress.images[img];
+		}
+	}
+	if (!exists(img.src)){
+		console.log("Error: Missing image reference:", img);
+		img = Helon.ress.images["cross"];
+	}
+	return img;
+}
+
+
+
+function getAudio(aud){
+	if (!exists(aud)) return "none";
+	if (!exists(aud.src)){
+		for (var a in Helon.ress.images){
+			if (a === aud) aud = Helon.ress.audio[aud];
+		}
+	}
+	if (!exists(aud.src)){
+		console.log("Error: Missing audio reference:", aud);
+		aud = "none";
+	}
+	return img;
+}
+
+
+
 function get360(input){
 	if (input === 0 || input === 360) return input;
 	while (!input.between(0, 360)){

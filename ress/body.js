@@ -14,19 +14,10 @@ class Body{
 	
 	
 	setSkin(to){
-		if (!exists(to)) to = "cross";
-		if (!exists(to.src)){
-			for (var a in Helon.ress.images){
-				if (a === to) to = Helon.ress.images[to];
-			}
-		}
-		if (!exists(to.src)){
-			console.log("Error: Missing image reference");
-			to = Helon.ress.images["cross"];
-		}
-		this.skin = to;
+		this.skin = getImg(to);
 		this.width = this.skin.naturalWidth;
 		this.height = this.skin.naturalHeight;
+		console.log(this.skin);
 	}
 	
 	

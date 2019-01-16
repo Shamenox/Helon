@@ -11,8 +11,10 @@
 	enter : false,
 };
 
+
+var cursor = new Body();
+var click = false;
 function loadCursor(){
-	var cursor = new Body();
 	cursor.setSkin("cursor");
 	cursor.display = function(){
 		if (click){ 
@@ -23,6 +25,7 @@ function loadCursor(){
 		}
 	}
 }
+
 
 
 addEventListener("keydown", function(w) {
