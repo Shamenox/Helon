@@ -24,7 +24,7 @@ function exists(obj){
 
 function getImg(img){
 	if (Helon.ress.images.loaded === 0){
-		console.log("No images loaded yet!!!");
+		console.log("Error: No images loaded yet!!!");
 		return new Image();
 	}
 	if (!exists(img)) img = "cross";
@@ -43,7 +43,7 @@ function getImg(img){
 
 
 function getAudio(aud){
-	if (!exists(aud)) return "none";
+	if (!exists(aud) || aud === "none") return "none";
 	if (!exists(aud.src)){
 		for (var a in Helon.ress.images){
 			if (a === aud) aud = Helon.ress.audio[aud];
@@ -53,7 +53,7 @@ function getAudio(aud){
 		console.log("Error: Missing audio reference:", aud);
 		aud = "none";
 	}
-	return img;
+	return aud;
 }
 
 

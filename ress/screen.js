@@ -1,13 +1,22 @@
 class Screen{
 	constructor(ID, bg, theme, action){
-		this.ID = ID;
+		if (exists(ID)){
+			this.ID = ID;
+		}
+		else{
+			this.ID = "Nameless screen " + Helon.screens.length;
+		}
 		this.bg = getImg(bg);
 		this.theme = getAudio(theme);
-		this.act = action;
+		if (exists(action)) this.act = action;
 		Helon.screens[ID] = this;
 	}
 	
 	act(){};
+	
+	set(){
+		Helon.screen = this;
+	}
 	
 	display(){
 		Helon.ctx.drawImage(this.bg, 0, 0);
@@ -19,5 +28,5 @@ class Screen{
 
 
 function setScreen(ID){
-	Helon.screen = Hellaxy.screens[ID];
+	Helon.screen = Helon.screens[ID];
 }

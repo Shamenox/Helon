@@ -8,10 +8,17 @@ Helon.ress.images = {
 	loaded : 0
 };
 Helon.apps = [];
-Helon.app = function(){ Helon.ctx.fillRect(0, 0, 1920, 1080);}
+Helon.app = function(){};
 Helon.screens = [];
 Helon.screen = new Screen();
 
+
+
+
+
+Helon.createScreen = function(ID, bg, theme, action){
+	Helon.screens[ID] = new Screen(ID, bg, theme, action);
+}
 
 
 
@@ -26,6 +33,7 @@ Helon.listOptions = function(){
 
 Helon.loop = function(){
 	Helon.app();
+	Helon.screen.display();
 	cursor.display();
 	Helon.tics++;
 	requestAnimationFrame(Helon.loop);
@@ -43,6 +51,18 @@ Helon.stop = function(){
 Helon.exit = function(){
 	Helon.loop = function(){};
 };
+
+
+
+Helon.setUp = function(){
+	loadCursor();
+	Helon.createScreen("Lobby", "blackscreen", "none", function(){
+		Helon.ctx.fillStyle = "yellow";
+		Helon.ctx.fillText("There is nothing to see here...", 400, 200);
+	});
+	setScreen("Lobby");
+	Helon.loop();
+}
 
 
 
@@ -69,6 +89,7 @@ Helon.loadRess = function(){
 }
 
 
+
 Helon.showRess = function(){
 	console.log(Helon.ress);
 }
@@ -82,8 +103,7 @@ Helon.start = function(){
 	Helon.ctx.fillText("Helon Engine", 200, 600);
 	Helon.ctx.fillStyle = "black";
 	Helon.loadRess();
-	setTimeout(loadCursor, 500);
-	setTimeout(Helon.loop, 3000);
+	setTimeout(Helon.setUp, 3000);
 	
 	if (Helon.apps.length != 0){
 		Helon.app = function(){
@@ -92,7 +112,7 @@ Helon.start = function(){
 			if (Helon.ress.images.quantity !== 0 && Helon.ress.images.loaded === Helon.ress.images.quantity) {
 				console.log(Helon.ress.images);
 				if (Helon.apps.length === 1){
-					Helon.load();
+					Helon.load(0);
 				}
 				else{
 					alert("Multiple executables found! \nChoose one with Helon.load(slot) or view options with Helon.listApps() !");

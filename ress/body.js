@@ -17,7 +17,6 @@ class Body{
 		this.skin = getImg(to);
 		this.width = this.skin.naturalWidth;
 		this.height = this.skin.naturalHeight;
-		console.log(this.skin);
 	}
 	
 	
