@@ -1,4 +1,6 @@
 class Body{
+	/** A movable object that can be displayed on the Canvas element
+	*/
 	constructor(){
 		this.x = 0;
 		this.y = 0;
